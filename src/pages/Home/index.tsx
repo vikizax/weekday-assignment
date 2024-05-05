@@ -1,7 +1,10 @@
 import { Box, Grid, LinearProgress } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import { useIntersactionObserver } from "../../hooks/useIntersactionObserver";
 import { IJobFetchResult } from "./types";
+import { JobCard } from "../../components/JobCard";
+
+const JobCardMemo = memo(JobCard)
 
 export const Home = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -75,10 +78,7 @@ export const Home = () => {
                 {
                     fetchedData.jdList.length > 0 && fetchedData.jdList.map((job, idx) => (
                         <Grid item key={`item-${job.jdUid}-${idx}`} xs={12} sm={6} md={4} alignItems={'end'}>
-                            <Box key={`${job.jdUid}`} border={'1px solid black'}>
-                                {job.companyName}
-                                <p>{job.jobDetailsFromCompany}</p>
-                            </Box>
+                            <JobCardMemo key={`${job.jdUid}`} {...job} />
                         </Grid>
                     )
                     )
