@@ -65,6 +65,13 @@ export const JobDescriptionBody = styled(Typography)(({ theme }) => ({
     maskImage: 'linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255), rgba(255, 255, 255, 0))'
 }))
 
+export const JobDescriptionBodyHead = styled(Typography)(({ theme }) => ({
+    fontSize: theme.typography.pxToRem(14),
+    fontWeight: 600,
+    overflow: 'hidden',
+}))
+
+
 export const ShowMoreActnContainer = styled(Box)(({ theme }) => ({
     position: 'relative',
     top: theme.typography.pxToRem(-20),

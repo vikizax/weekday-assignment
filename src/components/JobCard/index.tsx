@@ -6,6 +6,7 @@ import {
     CompanyName,
     JobCardContainer,
     JobDescriptionBody,
+    JobDescriptionBodyHead,
     JobDescriptionHead,
     JobLocation,
     JobLogoImg,
@@ -52,6 +53,9 @@ export const JobCard = (params: JobType) => {
                         About Company:
                     </JobDescriptionHead>
                     <JobDescriptionBody>
+                        <JobDescriptionBodyHead>
+                            About us
+                        </JobDescriptionBodyHead>
                         {params.jobDetailsFromCompany ?? ''}
                     </JobDescriptionBody>
                 </Box>
