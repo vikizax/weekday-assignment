@@ -4,6 +4,9 @@ import { CompanyNameFilter } from "./Filters/CompanyName";
 import { RolesFilter } from "./Filters/Roles";
 import { ExperienceFilter } from "./Filters/Experience";
 import { RemoteFilter } from "./Filters/Remote";
+import { MinBasePayFilter } from "./Filters/MinBasePay";
+import { NoOfEmployeesFilter } from "./Filters/NoOfEmployees";
+import { TechStackFilter } from "./Filters/TechStack";
 
 const FilterContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -17,8 +20,11 @@ export const JobFilter = () => {
   return (
     <FilterContainer>
       <RolesFilter />
+      <NoOfEmployeesFilter />
       <ExperienceFilter />
       <RemoteFilter />
+      <TechStackFilter />
+      <MinBasePayFilter />
       <CompanyNameFilter />
     </FilterContainer>
   );
