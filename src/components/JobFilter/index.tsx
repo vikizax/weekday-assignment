@@ -29,12 +29,12 @@ export const JobFilter = () => {
   const filters = useAppSelector((state) => state.filters);
   return (
     <FilterContainer>
-      <RolesFilterMemo roles={filters.roles ?? []} />
-      <NoOfEmployeesFilterMemo noOfEmp={filters.noOfEmp ?? []} />
-      <ExperienceFilterMemo experience={filters.experience ?? null} />
-      <RemoteFilterMemo remote={filters.remote ?? []} />
-      <TechStackFilterMemo techStack={filters.techStack ?? []} />
-      <MinBasePayFilterMemo minBasePay={filters.minBasePay ?? null} />
+      <RolesFilterMemo roles={filters.roles} />
+      <NoOfEmployeesFilterMemo noOfEmp={filters.noOfEmp } />
+      <ExperienceFilterMemo experience={filters.experience} />
+      <RemoteFilterMemo remote={filters.remote} />
+      <TechStackFilterMemo techStack={filters.techStack} />
+      <MinBasePayFilterMemo minBasePay={filters.minBasePay } />
       <CompanyNameFilterMemo companyName={filters.companyName ?? ""} />
     </FilterContainer>
   );
