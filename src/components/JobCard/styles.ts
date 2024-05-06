@@ -130,3 +130,17 @@ export const StyledAvatar = styled(Avatar)(({ theme }) => ({
     height: 32,
     filter: `blur(${theme.typography.pxToRem(1.5)})`
 }))
+
+export const JobPostedOnContainer = styled(Box)(({ theme }) => ({
+    padding: `${theme.typography.pxToRem(4)} ${theme.typography.pxToRem(6)}`,
+    boxShadow: 'rgba(6, 6, 6, 0.05) 0px 2px 6px 0px',
+    borderRadius: `${theme.typography.pxToRem(10)}`,
+    border: '1px solid rgb(230, 230, 230)',
+}))
+
+export const JobPostedOn = styled(Typography)(({ theme }) => ({
+    color: 'rgba(0, 0, 0, 0.87)',
+    fontWeight: 400,
+    lineHeight: 1.5,
+    fontSize: `${theme.typography.pxToRem(9)}`
+}))

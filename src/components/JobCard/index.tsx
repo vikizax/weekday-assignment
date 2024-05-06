@@ -9,6 +9,8 @@ import {
     JobDescriptionHead,
     JobLocation,
     JobLogoImg,
+    JobPostedOn,
+    JobPostedOnContainer,
     JobRole,
     JobSalary,
     MinimunExp,
@@ -22,6 +24,14 @@ export const JobCard = (params: JobType) => {
     return (
         <JobCardContainer aria-label="job card" id={params.jdUid}>
             <Box paddingX={({ typography }) => typography.pxToRem(8)} paddingY={({ typography }) => typography.pxToRem(16)}>
+                <Stack direction={'row'} paddingBottom={({ typography }) => typography.pxToRem(16)}>
+                    <JobPostedOnContainer>
+                        <JobPostedOn variant="body1">
+                            ⏳ Posted 10 days ago
+                        </JobPostedOn>
+                    </JobPostedOnContainer>
+                </Stack>
+
                 <Stack direction={'row'} gap={({ typography }) => typography.pxToRem(8)} aria-label="job header">
                     <JobLogoImg src={params.logoUrl} alt="job-logo" loading="lazy" fetchPriority="low" />
                     <Stack>
