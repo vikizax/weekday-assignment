@@ -4,18 +4,18 @@ import { useIntersactionObserver } from "../../hooks/useIntersactionObserver";
 import { IJobFetchResult } from "./types";
 import { JobCard } from "../../components/JobCard";
 import { JobFilter } from "../../components/JobFilter";
+import { useAppDisptach, useAppSelector } from "../../redux/index";
+import { setJobs } from "../../redux/slice/jobs.slice";
 
 const JobCardMemo = memo(JobCard);
 
 export const Home = () => {
+  const jobs = useAppSelector((state) => state.jobs);
+  const dispatch = useAppDisptach();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { elementRef, isVisible } = useIntersactionObserver(0.5);
   const limit = useRef<number>(10);
   const offset = useRef<number>(0);
-  const [fetchedData, setFetchedData] = useState<IJobFetchResult>({
-    jdList: [],
-    totalCount: 0,
-  });
 
   const fetchData = async (
     limit: number = 10,
@@ -43,10 +43,7 @@ export const Home = () => {
         requestOptions
       );
       const result = (await response.json()) as IJobFetchResult;
-      setFetchedData((prev) => ({
-        totalCount: result.totalCount,
-        jdList: prev.jdList.concat(result.jdList),
-      }));
+      dispatch(setJobs(result))
       setIsLoading(false);
 
       return abortController;
@@ -93,8 +90,8 @@ export const Home = () => {
           xs: 3,
         }}
       >
-        {fetchedData.jdList.length > 0 &&
-          fetchedData.jdList.map((job, idx) => (
+        {jobs.jdList.length > 0 &&
+          jobs.jdList.map((job, idx) => (
             <Grid
               item
               key={`item-${job.jdUid}-${idx}`}
