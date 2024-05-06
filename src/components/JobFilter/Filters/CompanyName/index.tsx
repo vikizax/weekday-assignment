@@ -1,6 +1,8 @@
 import { Stack, TextField } from "@mui/material";
 import { styled } from "@mui/material";
 import { FilterTitle } from "../FilterTitle";
+import { useAppDisptach } from "../../../../redux";
+import { setCompanyName } from "../../../../redux/slice/filters.slice";
 
 const FilterTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-inputSizeSmall": {
@@ -12,18 +14,24 @@ const FilterTextField = styled(TextField)(({ theme }) => ({
   },
 }));
 
-export const CompanyNameFilter = () => {
+type Params = {
+  companyName: string | null;
+};
+
+export const CompanyNameFilter = ({ companyName }: Params) => {
+  const isActive = companyName ? true : false;
+  const dispatch = useAppDisptach();
   return (
     <Stack>
-      <FilterTitle>
-        Company Name
-      </FilterTitle>
+      {isActive && <FilterTitle>Company Name</FilterTitle>}
       <FilterTextField
         size="small"
         placeholder="Company Name"
         onChange={(event) => {
-          console.log(event.target.value);
+          const toSetVal = event.target.value ? event.target.value : null;
+          dispatch(setCompanyName(toSetVal));
         }}
+        value={companyName ?? ""}
       />
     </Stack>
   );

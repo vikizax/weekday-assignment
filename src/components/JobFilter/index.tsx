@@ -7,6 +7,7 @@ import { RemoteFilter } from "./Filters/Remote";
 import { MinBasePayFilter } from "./Filters/MinBasePay";
 import { NoOfEmployeesFilter } from "./Filters/NoOfEmployees";
 import { TechStackFilter } from "./Filters/TechStack";
+import { useAppSelector } from "../../redux";
 
 const FilterContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -17,6 +18,8 @@ const FilterContainer = styled(Box)(({ theme }) => ({
 }));
 
 export const JobFilter = () => {
+  const filters = useAppSelector(state => state.filters)
+
   return (
     <FilterContainer>
       <RolesFilter />
@@ -25,7 +28,7 @@ export const JobFilter = () => {
       <RemoteFilter />
       <TechStackFilter />
       <MinBasePayFilter />
-      <CompanyNameFilter />
+      <CompanyNameFilter companyName={filters.companyName}/>
     </FilterContainer>
   );
 };
