@@ -22,7 +22,7 @@ export const CompanyNameFilter = () => {
         size="small"
         placeholder="Company Name"
         onChange={(event) => {
-          console.log(event.target.validationMessage);
+          console.log(event.target.value);
         }}
       />
     </Stack>
