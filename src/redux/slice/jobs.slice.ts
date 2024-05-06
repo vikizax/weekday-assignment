@@ -29,6 +29,11 @@ export const jobsSlice = createSlice({
             if (state.filters.companyName) {
                 filteredState = filteredState.filter(jd => jd.companyName.toLowerCase().includes(state.filters.companyName?.toLowerCase() ?? ''))
             }
+            if (state.filters.experience) {
+                filteredState = filteredState.filter(
+                    jd => Number(jd.minExp ?? 0) === Number(state.filters.experience?.value ?? 0)
+                )
+            }
             state.filteredJdList = filteredState
         }
     },
