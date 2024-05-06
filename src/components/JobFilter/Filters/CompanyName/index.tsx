@@ -1,5 +1,6 @@
 import { Stack, TextField } from "@mui/material";
 import { styled } from "@mui/material";
+import { FilterTitle } from "../FilterTitle";
 
 const FilterTextField = styled(TextField)(({ theme }) => ({
   "& .MuiInputBase-inputSizeSmall": {
@@ -14,6 +15,9 @@ const FilterTextField = styled(TextField)(({ theme }) => ({
 export const CompanyNameFilter = () => {
   return (
     <Stack>
+      <FilterTitle>
+        Company Name
+      </FilterTitle>
       <FilterTextField
         size="small"
         placeholder="Company Name"

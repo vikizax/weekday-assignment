@@ -1,16 +1,16 @@
 import { Stack } from "@mui/material";
 import Select from "react-select";
-import { rolesFilterData } from "../../filter.data";
+import { remoteFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
 
-export const RolesFilter = () => {
+export const RemoteFilter = () => {
   return (
     <Stack>
-      <FilterTitle>Roles</FilterTitle> 
+      <FilterTitle>Remote</FilterTitle>
       <Select
-        options={rolesFilterData}
+        options={remoteFilterData}
         isMulti
-        placeholder="Roles"
+        placeholder="Remote"
         onChange={(newValue) => {
           console.log({ newValue });
         }}

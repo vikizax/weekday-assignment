@@ -1,16 +1,16 @@
 import { Stack } from "@mui/material";
 import Select from "react-select";
-import { rolesFilterData } from "../../filter.data";
+import { experienceFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
 
-export const RolesFilter = () => {
+export const ExperienceFilter = () => {
   return (
     <Stack>
-      <FilterTitle>Roles</FilterTitle> 
+      <FilterTitle>Experience</FilterTitle>
       <Select
-        options={rolesFilterData}
-        isMulti
-        placeholder="Roles"
+        options={experienceFilterData}
+        placeholder="Experience"
+        isClearable
         onChange={(newValue) => {
           console.log({ newValue });
         }}
@@ -23,13 +23,6 @@ export const RolesFilter = () => {
             fontFamily: "Lexend , sans-serif",
           }),
           menuList: (base) => ({
-            ...base,
-            textTransform: "capitalize",
-            fontFamily: '"Lexend",sans-serif',
-            fontSize: 14,
-            fontWeight: 400,
-          }),
-          multiValue: (base) => ({
             ...base,
             textTransform: "capitalize",
             fontFamily: '"Lexend",sans-serif',
