@@ -1,3 +1,4 @@
+import { IFilters } from "../../components/JobFilter/types";
 
 export type JobType = {
     jdUid: string;
@@ -17,4 +18,5 @@ export type JobType = {
 export interface IJobFetchResult {
     jdList: JobType[];
     totalCount: number;
+    filters: Partial<IFilters>
 }
