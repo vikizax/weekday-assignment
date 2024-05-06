@@ -34,6 +34,42 @@ export const jobsSlice = createSlice({
                     jd => Number(jd.minExp ?? 0) === Number(state.filters.experience?.value ?? 0)
                 )
             }
+            if (state.filters?.minBasePay) {
+                filteredState = filteredState.filter(
+                    jd => Number(jd.minJdSalary ?? 0) >= Number(state.filters.minBasePay?.value.split(/[a-z]/i)[0] ?? 0)
+                )
+            }
+            if (state.filters?.noOfEmp) {
+                let min = Number.MAX_SAFE_INTEGER
+                let max = Number.MIN_SAFE_INTEGER
+
+                state.filters.noOfEmp.forEach(exp => {
+                    const [_min, _max] = exp.value.split('-')
+                    if (_max === undefined) return max = Math.max(max, Number(_min.replace('+', '') ?? 0))
+                    min = Math.min(min, Number(_min ?? 0))
+                    max = Math.max(max, Number(_max ?? 0))
+                })
+                min = min === Number.MAX_SAFE_INTEGER ? 0 : min;
+                // console.log({ min, max })
+            }
+            if (state.filters?.roles) {
+                filteredState = filteredState.filter(
+                    jd => state.filters.roles?.some(role => role.value.toLowerCase() === jd.jobRole)
+                )
+            }
+            if (state.filters.remote) {
+                filteredState = filteredState.filter(
+                    jd => {
+                        return state.filters.remote?.some(rem => {
+                            if (rem.value.toLowerCase() === 'in-office') return true;
+                            return rem.value.toLowerCase() === jd.location
+                        })
+                    }
+                )
+            }
+            if (state.filters.techStack) {
+                // techstack filter code...
+            }
             state.filteredJdList = filteredState
         }
     },
