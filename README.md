@@ -9,3 +9,6 @@ This a repo of weekday assignment created with react/redux/mui5
 ```
   npm run dev
 ```
+
+## Project Preview
+https://weekday-assignment-zeta.vercel.app/
