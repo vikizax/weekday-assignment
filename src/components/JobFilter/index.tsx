@@ -19,14 +19,13 @@ const FilterContainer = styled(Box)(({ theme }) => ({
 
 export const JobFilter = () => {
   const filters = useAppSelector((state) => state.filters);
-
   return (
     <FilterContainer>
-      <RolesFilter />
+      <RolesFilter roles={filters.roles} />
       <NoOfEmployeesFilter noOfEmp={filters.noOfEmp} />
       <ExperienceFilter experience={filters.experience} />
-      <RemoteFilter />
-      <TechStackFilter />
+      <RemoteFilter remote={filters.remote} />
+      <TechStackFilter techStack={filters.techStack} />
       <MinBasePayFilter minBasePay={filters.minBasePay} />
       <CompanyNameFilter companyName={filters.companyName} />
     </FilterContainer>

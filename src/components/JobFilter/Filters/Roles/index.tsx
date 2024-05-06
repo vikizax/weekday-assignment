@@ -2,17 +2,27 @@ import { Stack } from "@mui/material";
 import Select from "react-select";
 import { rolesFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
+import { RolesFilterType } from "../../types";
+import { useAppDisptach } from "../../../../redux";
+import { setRoles } from "../../../../redux/slice/filters.slice";
 
-export const RolesFilter = () => {
+type Params = {
+  roles: RolesFilterType | null;
+};
+
+export const RolesFilter = ({ roles }: Params) => {
+  const isActive = roles ? true : false;
+  const dispatch = useAppDisptach();
   return (
     <Stack>
-      <FilterTitle>Roles</FilterTitle> 
+      {isActive && <FilterTitle>Roles</FilterTitle>}
       <Select
         options={rolesFilterData}
         isMulti
         placeholder="Roles"
         onChange={(newValue) => {
-          console.log({ newValue });
+          const toSetVal = newValue.length > 0 ? newValue : null;
+          dispatch(setRoles(toSetVal as any as RolesFilterType));
         }}
         styles={{
           control: (base) => ({

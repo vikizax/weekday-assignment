@@ -2,17 +2,27 @@ import { Stack } from "@mui/material";
 import Select from "react-select";
 import { techStackFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
+import { BaseFilterType } from "../../types";
+import { useAppDisptach } from "../../../../redux";
+import { setTechStack } from "../../../../redux/slice/filters.slice";
 
-export const TechStackFilter = () => {
+type Params = {
+  techStack: BaseFilterType[] | null;
+};
+
+export const TechStackFilter = ({ techStack }: Params) => {
+  const isActive = techStack ? true : false;
+  const disptach = useAppDisptach();
   return (
     <Stack>
-     <FilterTitle>Tech Stack</FilterTitle>
+      {isActive && <FilterTitle>Tech Stack</FilterTitle>}
       <Select
         options={techStackFilterData}
         isMulti
         placeholder="Tech Stack"
         onChange={(newValue) => {
-          console.log({ newValue });
+          const toSetVal = newValue.length > 0 ? newValue : null;
+          disptach(setTechStack(toSetVal as BaseFilterType[]));
         }}
         styles={{
           control: (base) => ({
