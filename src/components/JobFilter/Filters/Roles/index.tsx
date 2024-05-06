@@ -5,7 +5,14 @@ import { rolesFilterData } from "../../filter.data";
 export const RolesFilter = () => {
   return (
     <Stack>
-      <Select options={rolesFilterData} isMulti placeholder="Roles" />
+      <Select
+        options={rolesFilterData}
+        isMulti
+        placeholder="Roles"
+        onChange={(newValue) => {
+          console.log({ newValue });
+        }}
+      />
     </Stack>
   );
 };
