@@ -21,6 +21,7 @@ export const jobsSlice = createSlice({
     initialState,
     reducers: {
         setJobs: (state, newState: PayloadAction<IJobFetchResult>) => {
+            console.log({ filters: newState.payload.filters })
             const updatedJdList = state.jdList.concat(newState.payload.jdList);
             state.jdList = updatedJdList;
             state.totalCount = newState.payload.totalCount;

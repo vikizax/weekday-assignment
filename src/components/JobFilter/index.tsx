@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { CompanyNameFilter } from "./Filters/CompanyName";
 import { RolesFilter } from "./Filters/Roles";
+import { NoOfEmployeesFilter } from "./Filters/NoOfEmployees";
 import { ExperienceFilter } from "./Filters/Experience";
 import { RemoteFilter } from "./Filters/Remote";
-import { MinBasePayFilter } from "./Filters/MinBasePay";
-import { NoOfEmployeesFilter } from "./Filters/NoOfEmployees";
 import { TechStackFilter } from "./Filters/TechStack";
+import { MinBasePayFilter } from "./Filters/MinBasePay";
+import { CompanyNameFilter } from "./Filters/CompanyName";
 import { useAppSelector } from "../../redux";
 import { memo } from "react";
 
@@ -17,7 +17,6 @@ const FilterContainer = styled(Box)(({ theme }) => ({
   padding: `0 ${theme.typography.pxToRem(20)} ${theme.typography.pxToRem(20)}`,
   gap: 10,
 }));
-
 const RolesFilterMemo = memo(RolesFilter);
 const TechStackFilterMemo = memo(TechStackFilter);
 const RemoteFilterMemo = memo(RemoteFilter);

@@ -11,7 +11,7 @@ type Params = {
 };
 
 export const TechStackFilter = ({ techStack }: Params) => {
-  const isActive = techStack ? true : false;
+  const isActive = techStack && techStack.length > 0 ? true : false
   const disptach = useAppDisptach();
   return (
     <Stack>

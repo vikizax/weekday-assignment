@@ -11,7 +11,7 @@ type Params = {
 };
 
 export const RemoteFilter = ({ remote }: Params) => {
-  const isActive = remote ? true : false;
+  const isActive = remote && remote.length > 0 ? true : false;
   const dispatch = useAppDisptach();
   return (
     <Stack>

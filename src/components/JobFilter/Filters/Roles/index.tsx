@@ -11,7 +11,7 @@ type Params = {
 };
 
 export const RolesFilter = ({ roles }: Params) => {
-  const isActive = roles ? true : false;
+  const isActive = roles && roles.length > 0 ? true : false;
   const dispatch = useAppDisptach();
   return (
     <Stack>

@@ -11,6 +11,7 @@ const JobCardMemo = memo(JobCard);
 
 export const Home = () => {
   const jobs = useAppSelector((state) => state.jobs);
+  const filters = useAppSelector((state) => state.filters);
   const dispatch = useAppDisptach();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { elementRef, isVisible } = useIntersactionObserver(0.5);
@@ -43,7 +44,7 @@ export const Home = () => {
         requestOptions
       );
       const result = (await response.json()) as IJobFetchResult;
-      dispatch(setJobs(result))
+      dispatch(setJobs(result));
       setIsLoading(false);
 
       return abortController;
@@ -75,6 +76,10 @@ export const Home = () => {
       abortController.abort();
     };
   }, [isVisible]);
+
+  useEffect(() => {
+    dispatch(setJobs({ ...jobs, jdList: [], filters }));
+  }, [filters]);
 
   return (
     <Box

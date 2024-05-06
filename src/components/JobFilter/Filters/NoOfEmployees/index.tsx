@@ -11,7 +11,7 @@ type Params = {
 };
 
 export const NoOfEmployeesFilter = ({ noOfEmp }: Params) => {
-  const isActive = noOfEmp ? true : false;
+  const isActive = noOfEmp && noOfEmp.length > 0 ? true : false;
   const dispatch = useAppDisptach();
   return (
     <Stack>
