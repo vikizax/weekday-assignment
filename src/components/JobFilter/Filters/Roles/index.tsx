@@ -3,7 +3,7 @@ import Select from "react-select";
 import { rolesFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
 import { RolesFilterType } from "../../types";
-import { useAppDisptach } from "../../../../redux";
+import { useAppDispatch } from "../../../../redux";
 import { setRoles } from "../../../../redux/slice/filters.slice";
 
 type Params = {
@@ -12,7 +12,7 @@ type Params = {
 
 export const RolesFilter = ({ roles }: Params) => {
   const isActive = roles && roles.length > 0 ? true : false;
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
   return (
     <Stack>
       {isActive && <FilterTitle>Roles</FilterTitle>}

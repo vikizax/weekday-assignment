@@ -3,7 +3,7 @@ import { noOfEmpFilterData } from "../../filter.data";
 import { Stack } from "@mui/material";
 import { FilterTitle } from "../FilterTitle";
 import { BaseFilterType } from "../../types";
-import { useAppDisptach } from "../../../../redux";
+import { useAppDispatch } from "../../../../redux";
 import { setNoOfEmp } from "../../../../redux/slice/filters.slice";
 
 type Params = {
@@ -12,7 +12,7 @@ type Params = {
 
 export const NoOfEmployeesFilter = ({ noOfEmp }: Params) => {
   const isActive = noOfEmp && noOfEmp.length > 0 ? true : false;
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
   return (
     <Stack>
       {isActive && <FilterTitle>Number of Employees</FilterTitle>}

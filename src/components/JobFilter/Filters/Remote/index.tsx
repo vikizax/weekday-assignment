@@ -3,7 +3,7 @@ import Select from "react-select";
 import { remoteFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
 import { BaseFilterType } from "../../types";
-import { useAppDisptach } from "../../../../redux";
+import { useAppDispatch } from "../../../../redux";
 import { setRemote } from "../../../../redux/slice/filters.slice";
 
 type Params = {
@@ -12,7 +12,7 @@ type Params = {
 
 export const RemoteFilter = ({ remote }: Params) => {
   const isActive = remote && remote.length > 0 ? true : false;
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
   return (
     <Stack>
       {isActive && <FilterTitle>Remote</FilterTitle>}

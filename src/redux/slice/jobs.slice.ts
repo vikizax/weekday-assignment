@@ -4,6 +4,7 @@ import { setCompanyName, setExperience, setMinBasePay, setNoOfEmp, setRemote, se
 
 const initialState = {
     jdList: [],
+    filteredJdList: [],
     totalCount: 0,
     filters: {
         companyName: null,
@@ -21,10 +22,14 @@ export const jobsSlice = createSlice({
     initialState,
     reducers: {
         setJobs: (state, newState: PayloadAction<IJobFetchResult>) => {
-            console.log({ filters: newState.payload.filters })
-            const updatedJdList = state.jdList.concat(newState.payload.jdList);
-            state.jdList = updatedJdList;
+            const updatedState = state.jdList.concat(newState.payload.jdList);
+            state.jdList = updatedState;
+            let filteredState = updatedState;
             state.totalCount = newState.payload.totalCount;
+            if (state.filters.companyName) {
+                filteredState = filteredState.filter(jd => jd.companyName.toLowerCase().includes(state.filters.companyName?.toLowerCase() ?? ''))
+            }
+            state.filteredJdList = filteredState
         }
     },
     extraReducers: (builder => {

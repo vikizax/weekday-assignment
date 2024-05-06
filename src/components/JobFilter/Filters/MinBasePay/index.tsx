@@ -3,7 +3,7 @@ import Select from "react-select";
 import { minBaseSalFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
 import { BaseFilterType } from "../../types";
-import { useAppDisptach } from "../../../../redux";
+import { useAppDispatch } from "../../../../redux";
 import { setMinBasePay } from "../../../../redux/slice/filters.slice";
 
 type Params = {
@@ -12,7 +12,7 @@ type Params = {
 
 export const MinBasePayFilter = ({ minBasePay }: Params) => {
   const isActive = minBasePay ? true : false;
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
   return (
     <Stack>
       {isActive && <FilterTitle>Min Base Pay Salary</FilterTitle>}

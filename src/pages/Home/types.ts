@@ -17,6 +17,7 @@ export type JobType = {
 
 export interface IJobFetchResult {
     jdList: JobType[];
+    filteredJdList: JobType[];
     totalCount: number;
     filters: Partial<IFilters>
 }

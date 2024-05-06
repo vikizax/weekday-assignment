@@ -1,28 +1,26 @@
 import { Box, Grid, LinearProgress, Stack } from "@mui/material";
 import { memo, useEffect, useRef, useState } from "react";
-import { useIntersactionObserver } from "../../hooks/useIntersactionObserver";
-import { IJobFetchResult } from "./types";
 import { JobCard } from "../../components/JobCard";
 import { JobFilter } from "../../components/JobFilter";
-import { useAppDisptach, useAppSelector } from "../../redux/index";
+import { IFilters } from "../../components/JobFilter/types";
+import { useIntersactionObserver } from "../../hooks/useIntersactionObserver";
+import { useAppDispatch, useAppSelector } from "../../redux/index";
 import { setJobs } from "../../redux/slice/jobs.slice";
+import { IJobFetchResult } from "./types";
 
-const JobCardMemo = memo(JobCard);
+const JobCardMemo = memo(JobCard)
 
 export const Home = () => {
   const jobs = useAppSelector((state) => state.jobs);
-  const filters = useAppSelector((state) => state.filters);
-  const dispatch = useAppDisptach();
+  const filters = useAppSelector((state) => state.jobs.filters);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { elementRef, isVisible } = useIntersactionObserver(0.5);
-  const limit = useRef<number>(10);
-  const offset = useRef<number>(0);
-
-  const fetchData = async (
-    limit: number = 10,
-    offset: number = 0,
-    abortController?: AbortController
-  ) => {
+  const disptach = useAppDispatch();
+  const { elementRef, isVisible } = useIntersactionObserver(0.5)
+  const limit = useRef<number>(10)
+  const offset = useRef<number>(0)
+  const isAppliedFilter = Object.keys(filters).some(key => filters[key as keyof IFilters] !== null)
+  const fetchData = async (limit: number = 10, offset: number = 0, abortController?: AbortController) => {
+    if (isAppliedFilter) return
     try {
       const body = JSON.stringify({
         limit,
@@ -31,7 +29,7 @@ export const Home = () => {
       const headers = new Headers();
       headers.append("Content-Type", "application/json");
       const signal = abortController?.signal;
-      if (signal) signal.onabort = () => setIsLoading(false);
+      if (signal) signal.onabort = () => setIsLoading(false)
       const requestOptions: RequestInit = {
         method: "POST",
         headers,
@@ -44,8 +42,9 @@ export const Home = () => {
         requestOptions
       );
       const result = (await response.json()) as IJobFetchResult;
-      dispatch(setJobs(result));
+
       setIsLoading(false);
+      disptach(setJobs(result));
 
       return abortController;
     } catch (err) {
@@ -68,46 +67,37 @@ export const Home = () => {
     const abortController = new AbortController();
     if (isVisible && !isLoading) {
       (async () => {
-        offset.current += 1;
+        offset.current += 1
         await fetchData(limit.current, offset.current, abortController);
       })();
     }
     return () => {
-      abortController.abort();
-    };
-  }, [isVisible]);
+      abortController.abort()
+    }
+  }, [isVisible])
 
   useEffect(() => {
-    dispatch(setJobs({ ...jobs, jdList: [], filters }));
-  }, [filters]);
+    disptach(setJobs({ ...jobs, jdList: [] }))
+  }, [filters])
+
 
   return (
-    <Box
-      paddingY={({ typography }) => typography.pxToRem(20)}
-      paddingX={({ typography }) => typography.pxToRem(14)}
-    >
-      <Stack direction={"row"} justifyContent={"center"}>
+    <Box paddingY={({ typography }) => typography.pxToRem(20)} paddingX={({ typography }) => typography.pxToRem(14)}>
+      <Stack direction={'row'} justifyContent={'center'}>
         <JobFilter />
       </Stack>
-      <Grid
-        container
-        spacing={{
-          xs: 3,
-        }}
+      <Grid container spacing={{
+        'xs': 3,
+      }}
       >
-        {jobs.jdList.length > 0 &&
-          jobs.jdList.map((job, idx) => (
-            <Grid
-              item
-              key={`item-${job.jdUid}-${idx}`}
-              xs={12}
-              sm={6}
-              md={4}
-              alignItems={"end"}
-            >
+        {
+          jobs.filteredJdList.length > 0 && jobs.filteredJdList.map((job, idx) => (
+            <Grid item key={`item-${job.jdUid}-${idx}`} xs={12} sm={6} md={4} alignItems={'end'}>
               <JobCardMemo key={`${job.jdUid}`} {...job} />
             </Grid>
-          ))}
+          )
+          )
+        }
         {/* last intersecting element */}
         <div ref={elementRef} />
       </Grid>

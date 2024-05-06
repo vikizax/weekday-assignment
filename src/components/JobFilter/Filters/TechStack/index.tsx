@@ -3,7 +3,7 @@ import Select from "react-select";
 import { techStackFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
 import { BaseFilterType } from "../../types";
-import { useAppDisptach } from "../../../../redux";
+import { useAppDispatch } from "../../../../redux";
 import { setTechStack } from "../../../../redux/slice/filters.slice";
 
 type Params = {
@@ -12,7 +12,7 @@ type Params = {
 
 export const TechStackFilter = ({ techStack }: Params) => {
   const isActive = techStack && techStack.length > 0 ? true : false
-  const disptach = useAppDisptach();
+  const disptach = useAppDispatch();
   return (
     <Stack>
       {isActive && <FilterTitle>Tech Stack</FilterTitle>}

@@ -3,7 +3,7 @@ import Select from "react-select";
 import { experienceFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
 import { BaseFilterType } from "../../types";
-import { useAppDisptach } from "../../../../redux";
+import { useAppDispatch } from "../../../../redux";
 import { setExperience } from "../../../../redux/slice/filters.slice";
 
 type Params = {
@@ -12,7 +12,7 @@ type Params = {
 
 export const ExperienceFilter = ({ experience }: Params) => {
   const isActive = experience ? true : false;
-  const dispatch = useAppDisptach();
+  const dispatch = useAppDispatch();
   return (
     <Stack>
       {isActive && <FilterTitle>Experience</FilterTitle>}
