@@ -8,6 +8,7 @@ import { MinBasePayFilter } from "./Filters/MinBasePay";
 import { NoOfEmployeesFilter } from "./Filters/NoOfEmployees";
 import { TechStackFilter } from "./Filters/TechStack";
 import { useAppSelector } from "../../redux";
+import { memo } from "react";
 
 const FilterContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -17,17 +18,25 @@ const FilterContainer = styled(Box)(({ theme }) => ({
   gap: 10,
 }));
 
+const RolesFilterMemo = memo(RolesFilter);
+const TechStackFilterMemo = memo(TechStackFilter);
+const RemoteFilterMemo = memo(RemoteFilter);
+const MinBasePayFilterMemo = memo(MinBasePayFilter);
+const CompanyNameFilterMemo = memo(CompanyNameFilter);
+const ExperienceFilterMemo = memo(ExperienceFilter);
+const NoOfEmployeesFilterMemo = memo(NoOfEmployeesFilter);
+
 export const JobFilter = () => {
   const filters = useAppSelector((state) => state.filters);
   return (
     <FilterContainer>
-      <RolesFilter roles={filters.roles} />
-      <NoOfEmployeesFilter noOfEmp={filters.noOfEmp} />
-      <ExperienceFilter experience={filters.experience} />
-      <RemoteFilter remote={filters.remote} />
-      <TechStackFilter techStack={filters.techStack} />
-      <MinBasePayFilter minBasePay={filters.minBasePay} />
-      <CompanyNameFilter companyName={filters.companyName} />
+      <RolesFilterMemo roles={filters.roles ?? []} />
+      <NoOfEmployeesFilterMemo noOfEmp={filters.noOfEmp ?? []} />
+      <ExperienceFilterMemo experience={filters.experience ?? null} />
+      <RemoteFilterMemo remote={filters.remote ?? []} />
+      <TechStackFilterMemo techStack={filters.techStack ?? []} />
+      <MinBasePayFilterMemo minBasePay={filters.minBasePay ?? null} />
+      <CompanyNameFilterMemo companyName={filters.companyName ?? ""} />
     </FilterContainer>
   );
 };
