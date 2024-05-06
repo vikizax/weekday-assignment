@@ -53,7 +53,7 @@ export const JobCard = (params: JobType) => {
                         About Company:
                     </JobDescriptionHead>
                     <JobDescriptionBody>
-                        <JobDescriptionBodyHead>
+                        <JobDescriptionBodyHead variant="body2">
                             About us
                         </JobDescriptionBodyHead>
                         {params.jobDetailsFromCompany ?? ''}
