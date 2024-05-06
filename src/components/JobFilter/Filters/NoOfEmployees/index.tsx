@@ -2,17 +2,27 @@ import Select from "react-select";
 import { noOfEmpFilterData } from "../../filter.data";
 import { Stack } from "@mui/material";
 import { FilterTitle } from "../FilterTitle";
+import { BaseFilterType } from "../../types";
+import { useAppDisptach } from "../../../../redux";
+import { setNoOfEmp } from "../../../../redux/slice/filters.slice";
 
-export const NoOfEmployeesFilter = () => {
+type Params = {
+  noOfEmp: BaseFilterType[] | null;
+};
+
+export const NoOfEmployeesFilter = ({ noOfEmp }: Params) => {
+  const isActive = noOfEmp ? true : false;
+  const dispatch = useAppDisptach();
   return (
     <Stack>
-      <FilterTitle>Number of Employees</FilterTitle>
+      {isActive && <FilterTitle>Number of Employees</FilterTitle>}
       <Select
         options={noOfEmpFilterData}
         isMulti
         placeholder="Number of Employees"
         onChange={(newValue) => {
-          console.log({ newValue });
+          const toSetVal = newValue.length > 0 ? newValue : null;
+          dispatch(setNoOfEmp(toSetVal as any as BaseFilterType[]));
         }}
         styles={{
           control: (base) => ({

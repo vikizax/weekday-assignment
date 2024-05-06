@@ -23,11 +23,11 @@ export const JobFilter = () => {
   return (
     <FilterContainer>
       <RolesFilter />
-      <NoOfEmployeesFilter />
+      <NoOfEmployeesFilter noOfEmp={filters.noOfEmp} />
       <ExperienceFilter experience={filters.experience} />
       <RemoteFilter />
       <TechStackFilter />
-      <MinBasePayFilter />
+      <MinBasePayFilter minBasePay={filters.minBasePay} />
       <CompanyNameFilter companyName={filters.companyName} />
     </FilterContainer>
   );

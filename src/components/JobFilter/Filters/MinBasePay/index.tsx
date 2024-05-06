@@ -2,17 +2,27 @@ import { Stack } from "@mui/material";
 import Select from "react-select";
 import { minBaseSalFilterData } from "../../filter.data";
 import { FilterTitle } from "../FilterTitle";
+import { BaseFilterType } from "../../types";
+import { useAppDisptach } from "../../../../redux";
+import { setMinBasePay } from "../../../../redux/slice/filters.slice";
 
-export const  MinBasePayFilter = () => {
+type Params = {
+  minBasePay: BaseFilterType | null;
+};
+
+export const MinBasePayFilter = ({ minBasePay }: Params) => {
+  const isActive = minBasePay ? true : false;
+  const dispatch = useAppDisptach();
   return (
     <Stack>
-      <FilterTitle>Min Base Pay Salary</FilterTitle>
+      {isActive && <FilterTitle>Min Base Pay Salary</FilterTitle>}
       <Select
         options={minBaseSalFilterData}
         isClearable
         placeholder="Minimum Base Pay Salary"
         onChange={(newValue) => {
-          console.log({ newValue });
+          const toSetVal = newValue?.value ? newValue : null;
+          dispatch(setMinBasePay(toSetVal));
         }}
         styles={{
           control: (base) => ({
@@ -28,7 +38,7 @@ export const  MinBasePayFilter = () => {
             fontFamily: '"Lexend",sans-serif',
             fontSize: 14,
             fontWeight: 400,
-          })
+          }),
         }}
       />
     </Stack>
